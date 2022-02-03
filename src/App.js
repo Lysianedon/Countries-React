@@ -1,10 +1,7 @@
 import React from 'react'
-import Button from './components/Button'
 import Card from './components/Card'
-
-const france = "france";
-const brazil = "brasil";
-const croatia = "croatia";
+import Searchbar from './components/Searchbar'
+import './App.css'
 
 class App extends React.Component {
 
@@ -17,26 +14,48 @@ class App extends React.Component {
       flag : "",
       population : "",
       region : "",
+      inputValue : "",
+      visible : false,
     }
     //Bind functions
     this.getCountry = this.getCountry.bind(this);
+    this.getSearchValue = this.getSearchValue.bind(this);
+  }
+
+  //GETTING THE INPUT VALUE (COUNTRY)
+  getSearchValue(e){
+
+    let value = e.target.value;
+    this.setState({inputValue : value})
+    console.log(this.state.inputValue);
   }
 
   //GET COUNTRY VIA API RESTCOUNTRIES :
 
   getCountry(country){
+    country = this.state.inputValue;
+
+    if (country === "" || country === " ") {
+          this.setState({visible : true})
+
+          setTimeout(() => {
+            this.setState({visible : false})
+          }, 2500);
+    }
+
     fetch(`https://restcountries.com/v3.1/name/${country}`)
     .then((res)=> res.json())
     .then((res)=> {
 
       this.setState({name : res[0].name.common,
         capital : res[0].capital,
-        flag : res[0].flag,
+        flag : res[0].flags.png,
         population : res[0].population,
         region : res[0].region,
       })
     })
-    .catch(error => console.error(error));
+    .catch(error => {
+      console.error(error)});
   }
 
   //UPDATE STATE ONCE IT IS MOUNTED WITH FRANCE'S DATA : 
@@ -58,14 +77,23 @@ class App extends React.Component {
 
   render() {
 
-    return (<div>
+    return (<div className="div-app">
               <div style={{display: "flex", margin: "auto"}}>
 
-              <Button onClick={this.getCountry(france)}>France</Button>
-              <Button onClick={this.getCountry(brazil)}>Brazil</Button>
-              <Button onClick={this.getCountry(croatia)}>Croatia</Button> 
 
+              <Searchbar onClick={(e)=> {
+                e.preventDefault();
+                this.getCountry()}}
+
+                getSearchValue={this.getSearchValue}/>
               </div>
+
+              {
+                this.state.visible === true ? 
+                ( <p className = "error">Error : The field is empty. Enter a country.</p>)
+                :
+                (null)
+              }
 
               <Card name={this.state.name} 
               capital={this.state.capital} 
