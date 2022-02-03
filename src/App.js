@@ -35,6 +35,7 @@ class App extends React.Component {
   getCountry(country){
     country = this.state.inputValue;
 
+    //Guard
     if (country === "" || country === " ") {
           this.setState({visible : true})
 
