@@ -22,6 +22,8 @@ class App extends React.Component {
     this.getCountry = this.getCountry.bind(this);
   }
 
+  //GET COUNTRY VIA API RESTCOUNTRIES :
+
   getCountry(country){
     fetch(`https://restcountries.com/v3.1/name/${country}`)
     .then((res)=> res.json())
@@ -34,8 +36,10 @@ class App extends React.Component {
         region : res[0].region,
       })
     })
+    .catch(error => console.error(error));
   }
 
+  //UPDATE STATE ONCE IT IS MOUNTED WITH FRANCE'S DATA : 
   componentDidMount(){
 
     fetch('https://restcountries.com/v3.1/name/france')
@@ -43,12 +47,13 @@ class App extends React.Component {
     .then((res)=>{
       this.setState({name : res[0].name.common,
                     capital : res[0].capital,
-                    flag : res[0].flag,
+                    flag : res[0].flags.png,
                     population : res[0].population,
                     region : res[0].region,
       })
 
     })
+    .catch(error => console.error(error));
   }
 
   render() {
@@ -72,6 +77,5 @@ class App extends React.Component {
   }
 }
 
-//Bug Restcountries?
 
 export default App;
