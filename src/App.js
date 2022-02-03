@@ -67,9 +67,11 @@ class App extends React.Component {
               region={this.state.region}
               population={this.state.population}
               flag={this.state.flag}/>
+
             </div>)
   }
 }
 
+//Bug Restcountries?
 
 export default App;
