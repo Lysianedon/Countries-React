@@ -61,7 +61,7 @@ class App extends React.Component {
 
   //UPDATE STATE ONCE IT IS MOUNTED WITH FRANCE'S DATA : 
   componentDidMount(){
-
+    // Displaying the info of France once the component did mount (initial state)
     fetch('https://restcountries.com/v3.1/name/france')
     .then((res) => res.json())
     .then((res)=>{
@@ -81,7 +81,7 @@ class App extends React.Component {
     return (<div className="div-app">
               <div style={{display: "flex", margin: "auto"}}>
 
-
+              {/* Earchbar component  */}
               <Searchbar onClick={(e)=> {
                 e.preventDefault();
                 this.getCountry()}}
@@ -89,13 +89,14 @@ class App extends React.Component {
                 getSearchValue={this.getSearchValue}/>
               </div>
 
-              {
+                {/* Displaying an error message if the field is empty */}
+              { 
                 this.state.visible === true ? 
                 ( <p className = "error">Error : The field is empty. Enter a country.</p>)
                 :
                 (null)
               }
-
+              {/* Card component */}
               <Card name={this.state.name} 
               capital={this.state.capital} 
               region={this.state.region}
