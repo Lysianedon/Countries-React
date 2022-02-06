@@ -1,3 +1,24 @@
+#ABOUT THE PROJECT : 
+
+API based website that display information about worldwide countries like their name, population, currency etc.
+
+HOW DOES IT WORK : 
+
+-Récupération de data sur les pays du monde via une API
+
+-Traitement et affichage des informations selon plusieurs filtres (par continent, par pays, la monnaie...)
+
+-Intégration d’une Map pour la localisation selon les coordonnées géographiques du pays
+
+STACKS USED :
+
+-Vanilla JavaScript
+
+-HTML5
+
+-CSS3
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
