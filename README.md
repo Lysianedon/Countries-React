@@ -16,7 +16,7 @@ STACKS USED :
 
 -HTML5
 
--CSS3
+-CSS3.
 
 
 # Getting Started with Create React App
