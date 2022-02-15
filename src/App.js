@@ -62,10 +62,8 @@ class App extends React.Component {
       this.setState({inputValue : ""});
       //
       document.querySelector('.searchbar').value = "";
-
-
       
-    })
+    }) //Guard : if country not found : display an error message
     .catch(error => {
       document.querySelector('.searchbar').value = "";
       this.setState({displayError : true})
@@ -88,7 +86,7 @@ class App extends React.Component {
                     region : res[0].region,
       })
 
-    })
+    }) //Guard
     .catch(error => {
       console.log(error);
     });
