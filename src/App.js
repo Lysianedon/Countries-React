@@ -67,7 +67,7 @@ class App extends React.Component {
       
     })
     .catch(error => {
-
+      document.querySelector('.searchbar').value = "";
       this.setState({displayError : true})
       setTimeout(() => {
         this.setState({displayError : false})
