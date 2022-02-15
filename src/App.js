@@ -27,7 +27,7 @@ class App extends React.Component {
 
     let value = e.target.value;
     this.setState({inputValue : value})
-    console.log(this.state.inputValue);
+    // console.log(this.state.inputValue);
   }
 
   //GET COUNTRY VIA API RESTCOUNTRIES :
@@ -48,14 +48,30 @@ class App extends React.Component {
     .then((res)=> res.json())
     .then((res)=> {
 
+      if (country == 404) {
+        console.log("coucou erreur");
+      }
+
       this.setState({name : res[0].name.common,
         capital : res[0].capital,
         flag : res[0].flags.png,
         population : res[0].population,
         region : res[0].region,
       })
+
+      this.setState({inputValue : ""});
+      //
+      document.querySelector('.searchbar').value = "";
+
+
+      
     })
     .catch(error => {
+
+      this.setState({displayError : true})
+      setTimeout(() => {
+        this.setState({displayError : false})
+      }, 2500);
       console.error(error)});
   }
 
@@ -73,7 +89,9 @@ class App extends React.Component {
       })
 
     })
-    .catch(error => console.error(error));
+    .catch(error => {
+      console.log(error);
+    });
   }
 
   render() {
@@ -93,6 +111,13 @@ class App extends React.Component {
               { 
                 this.state.visible === true ? 
                 ( <p className = "error">Error : The field is empty. Enter a country.</p>)
+                :
+                (null)
+              }
+
+              {
+                this.state.displayError === true ?
+                (<p className = "error">Country not found. Try again.</p>)
                 :
                 (null)
               }
